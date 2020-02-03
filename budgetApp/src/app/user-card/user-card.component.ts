@@ -1,6 +1,6 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ICurrentExpense } from '../models/models';
+import * as Models from '../models/models';
 
 @Component({
   selector: 'user-card',
@@ -16,20 +16,28 @@ export class UserCardComponent  {
     this.budgetForm = this.formBuilder.group({
       Name: '',
       Total: 0,
-      ID: null
-    })
+      ID: null,
+      Summary: ''
+    });
 
   }
-  expense: ICurrentExpense;
-  currentExpenses: Array<ICurrentExpense> = [];
-  budgetForm: any;
 
+  ngOnInit() {
+  }
 
-  @Output() expenseEvent = new EventEmitter<Array<ICurrentExpense>>();
+  @Output() expenseEvent = new EventEmitter<Array<Models.ICurrentExpense>>();
+  @Output() budgetEvent = new EventEmitter<Models.ICurrentBudget>();
   @Input() currentExpense;
+
+  expense: Models.ICurrentExpense;
+  currentExpenses: Array<Models.ICurrentExpense> = [];
+  budgetForm: any;
+  currentBudget: Models.ICurrentBudget = {UserInput: 1000, Total: 1000};
+
 
   emitExpenseArray(): void {
     this.expenseEvent.emit(this.currentExpenses);
+    this.budgetEvent.emit(this.currentBudget);
   }
 
   updateTotal(total: number): void {
@@ -37,7 +45,7 @@ export class UserCardComponent  {
   }
 
 
-  addExpense(expense: ICurrentExpense): void {
+  addExpense(expense: Models.ICurrentExpense): void {
 
     let ids: Array<number> = [];
     this.currentExpenses.length ? this.currentExpenses.map(x => ids.push(x.ID)) : null;
@@ -46,8 +54,8 @@ export class UserCardComponent  {
     this.currentExpense = this.currentExpenses.reduce(
       (accumulator, currentValue) => accumulator + currentValue.Total, 
       0)
+    this.currentBudget.Total = this.currentBudget.UserInput - this.currentExpense;
     this.budgetForm.reset();
-
   }
 
 }

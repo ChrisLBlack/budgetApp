@@ -1,15 +1,30 @@
 <div class="card">
     <div class="card-body">
       <h5 class="card-title">{{userName}}</h5>
-      <p class="card-text">Current Expenses: {{currentExpense | currency}}</p>
       <div class="row">
-          <div class="col-12">
+          <div class="col-6">
+            <div class="row">
+              <div class="col-12 mt-5">
+                <p class="card-text text-left">Current Expenses: {{currentExpense | currency}}</p>
+              </div>
+              <div class="col-12 mt-5">
+                <p class="card-text text-left">Current Budget: {{currentBudget.Total | currency}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
             <form [formGroup]="budgetForm" (ngSubmit)="addExpense(budgetForm.value)" ngNativeValidate>
               <div>
                 <label for="name">
                   Name
                 </label>
                 <input id="name" type="text" formControlName="Name" class="form-control" ([ngModel])='event.Name' required>
+              </div>
+              <div>
+                <label for="summary">
+                  Summary
+                </label>
+                <textarea id="summary" type="text" formControlName="Summary" class="form-control" ([ngModel])='event.Summary' required></textarea>
               </div>
               <div>
                 <label for="total">

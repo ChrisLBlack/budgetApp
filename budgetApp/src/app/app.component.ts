@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ICurrentExpense } from './models/models';
+import * as Models from './models/models';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +11,17 @@ export class AppComponent  {
   constructor(){}
 
   title: string = 'budgetApp';
-  currentExpenses: Array<ICurrentExpense>;
-  currentExpense: ICurrentExpense;
+  currentExpenses: Array<Models.ICurrentExpense>;
+  currentExpense: Models.ICurrentExpense;
   currentTotal: number;
+  currentBudget: Models.ICurrentBudget;
 
   getCurrentExpenses($event): void {
     this.currentExpenses = $event;
+  }
+
+  getCurrentBudget($event): void {
+    this.currentBudget = $event;
   }
 
   getCurrentTotal($event): void {
