@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ICurrentExpense } from '../models/models';
 
@@ -22,14 +22,18 @@ export class UserCardComponent  {
   }
   expense: ICurrentExpense;
   currentExpenses: Array<ICurrentExpense> = [];
-  currentExpense: number = 0;
   budgetForm: any;
 
 
   @Output() expenseEvent = new EventEmitter<Array<ICurrentExpense>>();
+  @Input() currentExpense;
 
   emitExpenseArray(): void {
     this.expenseEvent.emit(this.currentExpenses);
+  }
+
+  updateTotal(total: number): void {
+    this.currentExpense = total;
   }
 
 
@@ -43,7 +47,7 @@ export class UserCardComponent  {
       (accumulator, currentValue) => accumulator + currentValue.Total, 
       0)
     this.budgetForm.reset();
-    
+
   }
 
 }

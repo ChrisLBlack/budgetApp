@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ICurrentExpense } from '../models/models';
 
 @Component({
@@ -9,13 +9,20 @@ import { ICurrentExpense } from '../models/models';
 export class DetailCardComponent  {
 
   constructor() { }
-
-  @Input() currentExpense: ICurrentExpense;
+  total: number;
+  @Input() expense: ICurrentExpense;
   @Input() currentExpenses: Array<ICurrentExpense>;
+  @Output() currentTotal = new EventEmitter<number>();
 
   remove(expense: ICurrentExpense): void {
     this.currentExpenses.splice(this.currentExpenses.indexOf(expense), 1);
   }
 
-
+  removeClickEvent(expense: ICurrentExpense) {
+    this.remove(expense);
+    this.total = this.currentExpenses.reduce(
+      (accumulator, currentValue) => accumulator + currentValue.Total, 
+      0)
+    this.currentTotal.emit(this.total);
+  }
 }

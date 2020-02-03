@@ -1,13 +1,13 @@
 <div class="col-4 mt-3">
   <div class="card" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title">{{currentExpense.Name}}</h5>
+      <h5 class="card-title">{{expense.Name}}</h5>
       <div class="card-text">
         <p></p>
-        <p>{{currentExpense.Total | currency}}</p>
+        <p>{{expense.Total | currency}}</p>
       </div>
       <a class="btn btn-primary">Update</a>
-      <a class="btn btn-danger" (click)="remove(currentExpense)">Remove</a>
+      <a class="btn btn-danger" (click)="removeClickEvent(expense)">Remove</a>
     </div>
   </div>
 </div>
