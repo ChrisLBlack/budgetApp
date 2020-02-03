@@ -14,7 +14,8 @@
       <div class="row text-center mt-5">
         <div class="col-12">
           <div class="row mt-3">
-              <detail-card *ngFor="let currentExpense of currentExpenses; let i = index" [currentExpense]="currentExpenses[i]"></detail-card>
+            <detail-card *ngFor="let currentExpense of currentExpenses; let i = index"
+              [currentExpense]="currentExpenses[i]" [currentExpenses]='currentExpenses'></detail-card>
           </div>
         </div>
       </div>

@@ -6,8 +6,8 @@
         <p></p>
         <p>{{currentExpense.Total | currency}}</p>
       </div>
-      <a href="#" class="btn btn-primary">Update</a>
-      <a href="#" class="btn btn-danger">Remove</a>
+      <a class="btn btn-primary">Update</a>
+      <a class="btn btn-danger" (click)="remove(currentExpense)">Remove</a>
     </div>
   </div>
 </div>

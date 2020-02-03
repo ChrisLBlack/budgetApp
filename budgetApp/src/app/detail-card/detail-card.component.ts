@@ -11,6 +11,11 @@ export class DetailCardComponent  {
   constructor() { }
 
   @Input() currentExpense: ICurrentExpense;
+  @Input() currentExpenses: Array<ICurrentExpense>;
+
+  remove(expense: ICurrentExpense): void {
+    this.currentExpenses.splice(this.currentExpenses.indexOf(expense), 1);
+  }
 
 
 }
